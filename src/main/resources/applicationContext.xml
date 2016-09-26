@@ -4,19 +4,14 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
-
-
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.letv.vrcurrency.core"/>
-    <context:component-scan base-package="com.letv.vrcurrency.checkaccount"/>
-    <context:component-scan base-package="com.letv.vrcurrency.dao"/>
-    <context:component-scan base-package="com.lepay.account"/>
+    <context:component-scan base-package="com.yn.spring"/>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <constructor-arg>
-            <bean class="com.letv.vrcurrency.core.compoment.ClientHttpRequestFactory">
+            <bean class="com.yn.spring.compoment.ClientHttpRequestFactory">
                 <constructor-arg index="0" value="100"/>
             </bean>
         </constructor-arg>
