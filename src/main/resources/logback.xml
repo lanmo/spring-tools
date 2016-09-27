@@ -6,9 +6,9 @@
         </encoder>
     </appender>
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>~/logs/spring-tools.log</file>
+        <file>/yn/logs/spring-tools.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>~/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
+            <FileNamePattern>/yn/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
             <MaxHistory>90</MaxHistory>
         </rollingPolicy>
         <encoder>
@@ -36,9 +36,9 @@
     </appender>
 
     <appender name="FileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>~/logs/spring-tools_error.log</file>
+        <file>/yn/logs/spring-tools_error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>~/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
+            <FileNamePattern>/yn/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
             <MaxHistory>90</MaxHistory>
         </rollingPolicy>
         <encoder>
