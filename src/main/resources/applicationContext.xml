@@ -7,8 +7,10 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.yn.spring"/>
+    <context:component-scan base-package="com.yn.spring.compoment"/>
+    <context:component-scan base-package="com.yn.spring.service"/>
 
+    <!-- 同步请求 -->
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <constructor-arg>
             <bean class="com.yn.spring.compoment.ClientHttpRequestFactory">
@@ -17,5 +19,13 @@
         </constructor-arg>
     </bean>
 
+    <!-- 异步请求 -->
+    <bean id="asyncRestTemplate" class="org.springframework.web.client.AsyncRestTemplate">
+        <constructor-arg>
+            <bean class="com.yn.spring.compoment.AsyncClientHttpRequestFactory">
+                <constructor-arg index="0" value="100"/>
+            </bean>
+        </constructor-arg>
+    </bean>
 
 </beans>
