@@ -11,5 +11,6 @@ public class AppConstants {
 
     @PropertyConfig("app.url")
     public static String url;
+    private static int a;
 
 }
