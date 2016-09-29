@@ -30,12 +30,18 @@ public class TestAsynTemplate {
         String url = "http://localhost:8080/home/test";
         Map<String, Object> map = new HashMap<>();
         map.put("1", 1);
-        asyncRestTemplateService.getForObject(url, map, String.class);
-        Map<String, Object> map1 = new HashMap<>();
-        map1.put("POST", "POST");
-        asyncRestTemplateService.postForObject(url, map1, String.class);
-//        String str = restTemplateService.getForObject(url, String.class);
-//        L.trace(str);
+//        asyncRestTemplateService.getForObject(url, map, String.class);
+//        Map<String, Object> map1 = new HashMap<>();
+//        map1.put("POST", "POST");
+//        asyncRestTemplateService.postForObject(url, map1, String.class);
+////        String str = restTemplateService.getForObject(url, String.class);
+////        L.trace(str);
+
+        for (int i=0;i<10000; i++) {
+            map.put("i=" + i, i);
+            asyncRestTemplateService.getForObject(url, map, String.class);
+            L.trace(i);
+        }
         Thread.sleep(60 * 1000);
     }
 }

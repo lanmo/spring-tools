@@ -9,6 +9,8 @@
 
     <context:component-scan base-package="com.yn.spring.compoment"/>
     <context:component-scan base-package="com.yn.spring.service"/>
+    <context:component-scan base-package="com.yn.spring.config"/>
+    <context:component-scan base-package="com.yn.spring.constant"/>
 
     <!-- 同步请求 -->
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
@@ -26,6 +28,21 @@
                 <constructor-arg index="0" value="100"/>
             </bean>
         </constructor-arg>
+    </bean>
+
+    <bean id="configBean" class="com.yn.spring.config.ConfigBean">
+        <property name="configuration" ref="configuration"/>
+    </bean>
+    <bean id="configuration" class="org.apache.commons.configuration.XMLConfiguration">
+        <constructor-arg index="0" type="java.net.URL" value="classpath:${env:test}/app-config.xml" />
+    </bean>
+
+    <bean id="propertyInjectBeanPostProcessor" class="com.yn.spring.config.PropertyInjectBeanPostProcessor">
+        <property name="classNames">
+            <list>
+                <value>appConstants</value>
+            </list>
+        </property>
     </bean>
 
 </beans>
