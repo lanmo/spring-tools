@@ -6,6 +6,8 @@ import java.util.List;
 import com.yn.spring.annotation.PropertyConfig;
 import com.yn.spring.constant.AppConstants;
 import com.yn.spring.utils.L;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.SimpleTypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,13 @@ public class PropertyInjectBeanPostProcessor extends InstantiationAwareBeanPostP
 
     private SimpleTypeConverter converter = new SimpleTypeConverter();
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         if(classNames.contains(beanName)) {
             L.trace("beanName", beanName);
+            logger.info(beanName);
             findPropertyAutowiringMetadata(bean);
         }
 //        L.trace("beanName==", beanName);

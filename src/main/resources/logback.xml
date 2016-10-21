@@ -1,18 +1,36 @@
 <configuration scan="false"  scanPeriod="1 minutes"   debug="true">
 
+    <!-- 定义日志文件 输入位置 -->
+    <property name="LOGDIR" value="/Users/yangnan/logs" />
+    <!-- 日志最大的历史 30天 -->
+    <property name="MAXHISTORY" value="30"/>
+
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm} %level [%logger{5}.%M:%L] %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level [%logger{36}.%M:%L] %msg%n</pattern>
         </encoder>
     </appender>
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/yn/logs/spring-tools.log</file>
+        <file>${LOGDIR}/spring-tools.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/yn/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
-            <MaxHistory>90</MaxHistory>
+            <FileNamePattern>${LOGDIR}/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>${MAXHISTORY}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <Pattern>%d{HH:mm:ss} %level [%thread] [%logger{5}] - %msg%n</Pattern>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level [%logger] - %msg%n</Pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 自定义包 -->
+    <appender name="testFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGDIR}/spring-pt.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOGDIR}/logs/spring-pt_%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>${MAXHISTORY}</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level [%logger] - %msg%n</Pattern>
             <charset>utf-8</charset>
         </encoder>
     </appender>
@@ -22,7 +40,7 @@
         <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
         <discardingThreshold>0</discardingThreshold>
         <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
-        <queueSize>4096</queueSize>
+        <queueSize>1024</queueSize>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
@@ -36,13 +54,13 @@
     </appender>
 
     <appender name="FileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/yn/logs/spring-tools_error.log</file>
+        <file>${LOGDIR}/spring-tools_error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/yn/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
-            <MaxHistory>90</MaxHistory>
+            <FileNamePattern>/Users/yangnan/logs/spring-tools_%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>${MAXHISTORY}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <Pattern>%d{HH:mm:ss} %level [%thread] [%logger{5}] - %msg%n</Pattern>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%thread] [%logger{5}] - %msg%n</Pattern>
             <charset>utf-8</charset>
         </encoder>
     </appender>
@@ -69,6 +87,11 @@
         <param name="TimeSlice" value="60000"/>
         <appender-ref ref="perf4jFile"/>
     </appender>
+
+    <!-- 自定义包 -->
+    <logger name="com.yn.spring.config" level="INFO" additivity="false">
+        <appender-ref ref="testFile" />
+    </logger>
 
     <root level="debug">
         <appender-ref ref="RollingFile" />
