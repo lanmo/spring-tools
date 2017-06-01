@@ -5,4 +5,5 @@ package com.yn.spring.service;
  */
 public interface UserService {
     int add(int a, int b);
+    String print(String abc);
 }
