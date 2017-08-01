@@ -6,6 +6,8 @@ import com.yn.constants.Constant;
 import com.yn.keygen.DefaultKeyGenerator;
 import com.yn.keygen.KeyGenerator;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 /**
@@ -24,6 +26,8 @@ import org.slf4j.MDC;
 public class DubboTraceConsumerFilter implements Filter {
 
     private static final KeyGenerator keyGenerator = new DefaultKeyGenerator();
+
+    private static final Logger logger = LoggerFactory.getLogger(DubboTraceConsumerFilter.class);
 
     public DubboTraceConsumerFilter() {
         System.out.println("DubboTraceConsumerFilter 初始化了");
@@ -45,15 +49,13 @@ public class DubboTraceConsumerFilter implements Filter {
             System.out.println(traceId);
         }
 
+        long startTime = System.currentTimeMillis();
         try {
-            long startTime = System.currentTimeMillis();
             Result result = invoker.invoke(invocation);
-            System.out.println("服务提供者耗时" + (System.currentTimeMillis() - startTime));
             return result;
         } finally {
-            if (rpcContext.isProviderSide()) {
-                MDC.clear();
-            }
+            long endTime = System.currentTimeMillis();
+            logger.info("接口:[{}] 耗时:[{}]", invocation.getMethodName(), endTime - startTime);
         }
 
     }
