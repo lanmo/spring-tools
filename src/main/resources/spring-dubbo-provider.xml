@@ -17,7 +17,7 @@
     <dubbo:monitor protocol="registry" />
 
     <bean id="userService" class="com.yn.service.impl.UserServiceImpl"/>
-    <dubbo:service interface="com.yn.service.UserService" loadbalance="random"  ref="userService" version="1.0" timeout="35000" registry="registryT" filter="dubboTraceConsumer, "/>
+    <dubbo:service interface="com.yn.service.UserService" loadbalance="random"  ref="userService" version="1.0" timeout="35000" registry="registryT"/>
 
 
 </beans>
