@@ -1,0 +1,2 @@
+dubboTraceProvider=com.yn.spring.filter.DubboTraceProviderFilter
+dubboTraceConsumer=com.yn.spring.filter.DubboTraceConsumerFilter

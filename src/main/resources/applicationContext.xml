@@ -45,4 +45,6 @@
         </property>
     </bean>
 
+    <import resource="spring-dubbo-reference.xml" />
+
 </beans>

@@ -20,7 +20,16 @@
                 <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/><!-- json转换器 -->
             </list>
         </property>
+        <property name="argumentResolvers">
+            <bean class="com.yn.spring.resolver.BaseFormArgumentResolver" />
+        </property>
     </bean>
     <!-- 默认的注解映射的支持 -->
-    <mvc:annotation-driven/>
+    <!-- 表单基础数据绑定 -->
+    <mvc:annotation-driven >
+        <mvc:argument-resolvers>
+            <bean class="com.yn.spring.resolver.BaseFormArgumentResolver">
+            </bean>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 </beans>

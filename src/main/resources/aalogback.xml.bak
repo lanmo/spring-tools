@@ -17,7 +17,7 @@
             <MaxHistory>${MAXHISTORY}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level [%logger] - %msg%n</Pattern>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level [%logger] - [%X{test}] - %msg%n</Pattern>
             <charset>utf-8</charset>
         </encoder>
     </appender>
