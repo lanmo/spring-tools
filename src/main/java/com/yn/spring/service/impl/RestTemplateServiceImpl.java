@@ -1,6 +1,5 @@
 package com.yn.spring.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yn.spring.service.RestTemplateService;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,9 +34,9 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         String response = null;
         try {
             response = restTemplate.getForObject(uri, String.class);
-            T obj = JSONObject.parseObject(response, type);
+//            T obj = JSONObject.parseObject(response, type);
             logger.info("RestTemplateServiceImpl.getForObject url:[{}], response:[{}]", uri, response);
-            return obj;
+            return null;
         } catch (Exception e) {
             logger.error("RestTemplateServiceImpl.getForObject Exception url:[{}], response:[{}]", uri, response, e);
             throw e;
@@ -52,9 +51,9 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         try {
             MultiValueMap map = getPostMap(param);
             response = restTemplate.postForObject(url, map, String.class);
-            T obj = JSONObject.parseObject(response, type);
+//            T obj = JSONObject.parseObject(response, type);
             logger.info("RestTemplateServiceImpl.postForObject url:[{}], response:[{}]", url, response);
-            return obj;
+            return null;
         } catch (Exception e) {
             logger.error("RestTemplateServiceImpl.postForObject Exception url:[{}], response:[{}]", url, response, e);
             throw e;
